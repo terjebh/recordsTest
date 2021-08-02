@@ -1,5 +1,6 @@
 package com.noderia.java;
 
+import javax.swing.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,7 +20,9 @@ public class App {
 
         try (var is = new ObjectInputStream(new FileInputStream("record.data")) ) {
            Person arnein = (Person) is.readObject();
-            System.out.println(arnein.fornavn()+" "+ arnein.etternavn()+" er "+arnein.alder()+ " år gammel.");
+            String message = "Fra record.data: "+arnein.fornavn()+" "+ arnein.etternavn()+" er "+arnein.alder()+ " år gammel.";
+            System.out.println(message);
+            JOptionPane.showMessageDialog(null, message);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -28,7 +31,7 @@ public class App {
 
 
         try(var ut = new FileWriter("record.txt",false) ) {
-            String tekst = (arne.fornavn() + " " + arne.etternavn() + " er " + arne.alder() + " år gammel\n");
+            String tekst = "Fra record.txt: "+arne.fornavn() + " " + arne.etternavn() + " er " + arne.alder() + " år gammel\n";
             ut.write(tekst);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -38,6 +41,7 @@ public class App {
 
         try {
             Files.lines(Paths.get("record.txt")).forEach(System.out::println);
+            Files.lines(Paths.get("record.txt")).forEach(a -> JOptionPane.showMessageDialog(null,a));
         } catch (IOException e) {
             e.printStackTrace();
         }
