@@ -29,7 +29,6 @@ public class App {
             e.printStackTrace();
         }
 
-
         try(var ut = new FileWriter("record.txt",false) ) {
             String tekst = "Fra record.txt: "+arne.fornavn() + " " + arne.etternavn() + " er " + arne.alder() + " år gammel\n";
             ut.write(tekst);
